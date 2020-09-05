@@ -1,14 +1,29 @@
 import requests
 
-print('\n===Currency Converter===\n')
-amount = float(input('\tHow much money do You want to convert? '))
-from_currency = input('\tWhat is Your base currency? ').upper()
-to_currency = input('\tWhat currency do You want to get? ').upper()
 
-req = requests.get('https://api.exchangeratesapi.io/latest',
-                   params={'base': from_currency})
-target_rate = req.json()['rates'][to_currency]
+print('\n\t\t===Currency Converter===\n')
 
 
-value = amount * target_rate
-print(f'\n{amount}{from_currency} ===> {round(value, 2)}{to_currency}\n')
+class Converter:
+    def __init__(self):
+        self.amount = float(input('\tHow much money do You want to convert? '))
+        self.base_currency = input('\tWhat is Your base currency? ').upper()
+        self.rates = None
+
+        self.convert()
+        self.printer()
+
+    def convert(self):
+        req = requests.get('https://api.exchangeratesapi.io/latest',
+                           params={'base': self.base_currency})
+        self.rates = req.json()['rates']
+
+    def printer(self):
+        print(f'\n{self.amount}{self.base_currency} converted into..\n')
+        for currency, rate in self.rates.items():
+            converted_amount = round(rate * self.amount, 2)
+
+            print(f'{currency} => {converted_amount}')
+
+
+cc = Converter()
