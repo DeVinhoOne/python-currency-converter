@@ -1,12 +1,20 @@
 import requests
 
+from show_additional_info import show_additional_info
 
-print('\n\t\t===Currency Converter===\n')
+print('\n\t\t===Currency Converter===')
+show_info = input('\tDo You need additional info?(y/n) ').lower()
+
+if show_info == 'y':
+    show_additional_info()
+elif show_info == 'n':
+    pass
 
 
 class Converter:
     def __init__(self):
-        self.amount = float(input('\tHow much money do You want to convert? '))
+        self.amount = float(
+            input('\n\tHow much money do You want to convert? '))
         self.base_currency = input('\tWhat is Your base currency? ').upper()
         self.rates = None
 
