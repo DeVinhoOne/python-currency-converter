@@ -31,7 +31,7 @@ class Converter:
         for currency, rate in self.rates.items():
             converted_amount = round(rate * self.amount, 2)
 
-            print(f'{currency} => {converted_amount}')
+            print(f'{currency}({round(rate, 2)}) ===> {converted_amount}')
 
 
 cc = Converter()
